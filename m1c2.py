@@ -1,10 +1,14 @@
-import pandas as pd
+# Create indiv_per_10k col as homeless individuals per 10k state pop
+homelessness["indiv_per_10k"] = 10000 * homelessness["individuals"] / homelessness["state_pop"]
 
-data=pd.read_csv("sales_subset.csv")
+# Subset rows for indiv_per_10k greater than 20
+high_homelessness = homelessness[homelessness["indiv_per_10k"] > 20]
 
-print(data.info())
-# Select the individuals column
-individuals = homelessness["individuals"]
+# Sort high_homelessness by descending indiv_per_10k
+high_homelessness_srt = high_homelessness.sort_values(["indiv_per_10k"] , ascending = False)
 
-# Print the head of the result
-print(individuals.head())
+# From high_homelessness_srt, select the state and indiv_per_10k cols
+result = high_ho.melessness_srt[["state" , "indiv_per_10k"]]
+
+# See the result
+print(result)
